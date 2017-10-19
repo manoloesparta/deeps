@@ -5,6 +5,7 @@ from train import train_model
 from save_model import save_model
 from load_model import load_model
 from preprocessing import preprocessing
+from one_sample import one_sample
 
 from pathlib import Path
 
@@ -37,23 +38,35 @@ if load == 0:
 
 predict = int(input("Predict y_test (0/1): "))
 
+y_pred = model.predict(X_test)
+y_pred_bool = (y_pred > 0.5)
+
 if predict == 1:
 
 	print("Probability of each one to quit, sample = 10")
-	y_pred = model.predict(X_test)
 	for i in y_pred[0:10]:
 		print(i)
 
 	print("They will quit in the next 6 months?, sample = 10")
-	y_pred = (y_pred > 0.5)
-	for i in y_pred[0:10]:
+	for i in y_pred_bool[0:10]:
 		print(i)
 
 medir = int(input("Check precision (0/1): "))
 
 if medir == 1:
 
-	accuracy = classification_report(y_test,y_pred)
+	accuracy = classification_report(y_test,y_pred_bool)
 	print(accuracy)
 
 tryit = int(input("Predict over one sample (0/1): "))
+
+if tryit == 1:
+
+	pred = model.predict(one_sample())
+	print("Probability to get out")
+	print(pred)
+
+	pred = (pred > 0.5)
+	print("He will quit in the next 6 months?")
+	print(pred)
+
