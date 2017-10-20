@@ -20,6 +20,6 @@ if __name__ == "__main__":
 	X_train = pre[0]
 	y_train = pre[1]
 
-	model = train_model(X_train,y_train,10,1)
+	model = train_model(X_train,y_train,10,1,'model')
 
-	save_model(model)
+	save_model(model,'model')

@@ -18,9 +18,9 @@ load = int(input("Load Model (0/1): "))
 
 if load == 1:
 
-	file = input("File: ")
+	file = input("File (no extensions): ")
 
-	if not Path(file).is_file():
+	if not Path(file + '.json').is_file():
 		print("File not found")
 		load = 0
 	else:
@@ -35,6 +35,16 @@ if load == 0:
 	batch = int(input("Batch Size: "))
 
 	model = train_model(X_train,y_train,batch,epochs,file)
+
+
+more_train = int(input("More training (0/1): "))
+
+if more_train == 1:
+
+	more_epochs = int(input("How much epochs: "))
+	batch = int(input("Batch Size: "))
+	model = train_model(X_train,y_train,batch,more_epochs,file)
+
 
 predict = int(input("Predict y_test (0/1): "))
 
