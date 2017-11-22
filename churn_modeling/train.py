@@ -8,7 +8,10 @@ def train_model(X_train,y_train,batch_size,nb_epoch,file):
 	model = Sequential()
 
 	model.add(Dense(units=6,kernel_initializer='uniform',activation='relu',input_dim=11))
+	classifier.add(Dropout(p=0.1))
 	model.add(Dense(units=6,kernel_initializer='uniform',activation='relu'))
+	classifier.add(Dropout(p=0.1))
+	
 	model.add(Dense(units=1,kernel_initializer='uniform',activation='sigmoid'))
 
 	model.compile(optimizer='Adam',loss='binary_crossentropy',metrics=['accuracy'])
